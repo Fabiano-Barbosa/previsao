@@ -1,0 +1,13 @@
+<html>
+	<head>
+		<title>Previsao do tempo para Hoje</title>
+	</head>
+	<body>
+		<h2>Histórico de consultas gravadas no banco de dados</h2>
+		
+		{{ log_pg|safe }}
+		
+		<br>
+		<button onclick="javascript:history.go(-1);">Voltar</button>
+	</body>
+</html>
