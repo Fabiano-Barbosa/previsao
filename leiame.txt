@@ -1,0 +1,37 @@
+Neste projeto procurei não utilizar nenhum framework na saída para facilitar o entendimento, comumente gosto de utilizar o bootstrap.
+Nos fontes do python utilizei as seguintes Bibliotecas...
+Flask			Para criação do webserver
+Psycopg		Para conexão com o Postgres
+Pandas		Para gerar um resultado em formato tabela na consulta ao postgres
+render_template		Para carregar a página com as informações necessárias no cliente
+request			Para pegar as informações repassadas pelo usuário, ex. cidade
+json			Para manipular as informações obtidas pela api do openweathermap e gerar o log do histórico
+os.path			Para consultar se o arquivo existe antes de ler e evitar um traceback
+requests		Para buscar o json resultante da consulta executada na api do openweathermap
+datetime		Para converter o timestamp recebido pela api do openweathermap em formato brasileiro de data e hora
+
+Abaixo entre <inicio> e <fim> são Comandos SQL para a criação do banco de dados
+<inicio>
+CREATE DATABASE previsao;
+
+CREATE TABLE public.consultas (
+    id integer NOT NULL,
+    datahora timestamp without time zone DEFAULT now(),
+    cidade text NOT NULL,
+    ip text,
+    pais text,
+    latitude text,
+    longitude text,
+    agora_temp text,
+    agora_sens text,
+    agora_min text,
+    agora_max text
+);
+
+ALTER TABLE public.consultas OWNER TO postgres;
+
+ALTER TABLE ONLY public.consultas
+    ADD CONSTRAINT consultas_pkey PRIMARY KEY (id);
+<fim>
+
+No arquivo "previsao.py" observe as informações de conexão com o banco de dados postgres, host, database, user, password
